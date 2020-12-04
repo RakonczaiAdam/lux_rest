@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class RegisterController {
-
+    // comment for test commit
     private UserService userService;
     private PasswordEncoder passwordEncoder;
 
