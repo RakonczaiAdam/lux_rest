@@ -24,15 +24,16 @@ public class CommentService {
         this.postRepo = postRepo;
     }
 
-    public void saveComment(Comment comment, String user, Long postId) throws Exception{
-        comment.setUser(userRepo.findByEmail(user));
+    public Comment saveComment(Comment comment, String user, Long postId) throws Exception{
+        comment.setUser(userRepo.findByUsername(user));
         comment.setDate(new Date());
         comment.setPost(postRepo.findById(postId).get());
-        commentRepo.save(comment);
+        return commentRepo.save(comment);
     }
 
     public List<Comment> getComments(Long postId){
         return commentRepo.findByPost(postRepo.findById(postId).get());
     }
+
 
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
+import java.util.List;
 
 @RestController
 @RequestMapping("/friendship")
@@ -22,10 +23,10 @@ public class FriendshipResourceController {
     }
 
     @PostMapping("/request")
-    public ResponseEntity<String> request(@RequestParam(name = "receiver_id") Long receiverId,
+    public ResponseEntity<String> request(@RequestParam(name = "receiver_username") String receiverUsername,
                                           HttpServletRequest request){
         try {
-            friendshipService.friendRequest(request.getUserPrincipal().getName(), receiverId);
+            friendshipService.friendRequest(request.getUserPrincipal().getName(), receiverUsername);
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -33,11 +34,11 @@ public class FriendshipResourceController {
     }
 
     @PutMapping("/response")
-    public ResponseEntity<String> response(@RequestParam(name = "sender_id") Long senderId,
+    public ResponseEntity<String> response(@RequestParam(name = "sender_username") String senderUsername,
                                            @RequestParam(name = "response_status") Character responseStatus,
                                            HttpServletRequest request){
         try {
-            friendshipService.friendResponse(senderId, responseStatus, request.getUserPrincipal().getName());
+            friendshipService.friendResponse(senderUsername, responseStatus, request.getUserPrincipal().getName());
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -45,13 +46,18 @@ public class FriendshipResourceController {
     }
 
     @GetMapping("/pending")
-    public Collection<User> pending(HttpServletRequest request){
+    public List<User> pending(HttpServletRequest request){
         return friendshipService.getPendings(request.getUserPrincipal().getName());
     }
 
     @GetMapping("/friends")
-    public Collection<User> get(HttpServletRequest request){
+    public List<User> get(HttpServletRequest request){
         return friendshipService.getFriends(request.getUserPrincipal().getName());
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<User> search(@RequestParam(name = "name") String username){
+        return new ResponseEntity<>(friendshipService.getUser(username), HttpStatus.OK);
     }
 
 

@@ -10,8 +10,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-
 @Service
 public class UserService implements UserDetailsService {
 
@@ -35,7 +33,7 @@ public class UserService implements UserDetailsService {
     }
 
     public User findByEmail(String email){
-        return userRepo.findByEmail(email);
+        return userRepo.findByUsername(email);
     }
 
     public void saveUser(User user)throws Exception{

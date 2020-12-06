@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -26,13 +25,13 @@ public class FriendshipService {
         this.friendRequestRepo = friendRequestRepo;
     }
 
-    public void friendRequest(String sender, Long receiver) throws Exception{
-        friendRequestRepo.save(new FriendRequest(userRepo.findByEmail(sender), userRepo.findById(receiver).get(), SENT));
+    public void friendRequest(String sender, String receiver) throws Exception{
+        friendRequestRepo.save(new FriendRequest(userRepo.findByUsername(sender), userRepo.findByUsername(receiver), SENT));
     }
 
-    public void friendResponse(Long senderId, Character responseStatus, String receiverName) throws Exception{
-        User receiver = userRepo.findByEmail(receiverName);
-        FriendRequest friendRequest = friendRequestRepo.findBySenderAndReceiver(userRepo.findById(senderId).get(), receiver);
+    public void friendResponse(String senderId, Character responseStatus, String receiverName) throws Exception{
+        User receiver = userRepo.findByUsername(receiverName);
+        FriendRequest friendRequest = friendRequestRepo.findBySenderAndReceiver(userRepo.findByUsername(senderId), receiver);
         FriendRequest friendRequestRef = friendRequestRepo.getOne(friendRequest.getId());
         if(responseStatus == REJECT){
             friendRequestRef.setStatus(REJECT);
@@ -43,8 +42,8 @@ public class FriendshipService {
         friendRequestRepo.save(friendRequestRef);
     }
 
-    public Collection<User> getPendings(String username){
-        User currentUser = userRepo.findByEmail(username);
+    public List<User> getPendings(String username){
+        User currentUser = userRepo.findByUsername(username);
         List<FriendRequest> friendRequests = friendRequestRepo.findAll();
         List<User> pending = new ArrayList<>();
         for(FriendRequest friendRequest : friendRequests){
@@ -57,8 +56,8 @@ public class FriendshipService {
         return pending;
     }
 
-    public Collection<User> getFriends(String username){
-        User currentUser = userRepo.findByEmail(username);
+    public List<User> getFriends(String username){
+        User currentUser = userRepo.findByUsername(username);
         List<FriendRequest> friendRequests = friendRequestRepo.findAll();
         List<User> friends = new ArrayList<>();
         for(FriendRequest friendRequest : friendRequests){
@@ -69,6 +68,10 @@ public class FriendshipService {
             }
         }
         return friends;
+    }
+
+    public User getUser(String username){
+        return userRepo.findByUsername(username);
     }
 
 }

@@ -24,7 +24,7 @@ public class LikeService {
     }
 
     public void saveLike(String user, Long postId) throws Exception{
-        likeRepo.save(new Like(userRepo.findByEmail(user), postRepo.findById(postId).get()));
+        likeRepo.save(new Like(userRepo.findByUsername(user), postRepo.findById(postId).get()));
     }
 
     public List<Like> getLikes(Long postId){

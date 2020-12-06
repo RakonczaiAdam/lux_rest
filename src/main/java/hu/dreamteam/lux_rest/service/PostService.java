@@ -32,7 +32,7 @@ public class PostService {
 
     public List<Post> getPosts(String username){
         List<User> friends = (ArrayList<User>) friendshipService.getFriends(username);
-        friends.add(userRepo.findByEmail(username));
+        friends.add(userRepo.findByUsername(username));
         List<Post> posts = new ArrayList<>();
         for(User user : friends){
             for(Post post : user.getPosts()){
@@ -44,7 +44,7 @@ public class PostService {
     }
 
     public void savePost(Post post, String user){
-        post.setUser(userRepo.findByEmail(user));
+        post.setUser(userRepo.findByUsername(user));
         post.setDate(new Date());
         postRepo.save(post);
     }
