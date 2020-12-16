@@ -12,6 +12,7 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/like")
+@CrossOrigin(origins = {"http://localhost:3000"})
 public class LikeResourceController {
 
     private LikeService likeService;

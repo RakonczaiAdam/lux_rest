@@ -13,6 +13,7 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/post")
+@CrossOrigin(origins = {"http://localhost:3000"})
 public class PostResourceController {
 
     private PostService postService;

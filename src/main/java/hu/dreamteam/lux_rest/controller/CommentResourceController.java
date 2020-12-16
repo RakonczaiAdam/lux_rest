@@ -20,6 +20,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/comment")
+@CrossOrigin(origins = {"http://localhost:3000"})
 public class CommentResourceController {
 
     private CommentService commentService;
