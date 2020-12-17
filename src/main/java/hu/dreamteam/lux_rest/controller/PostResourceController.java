@@ -13,7 +13,7 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/post")
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://lux-client.herokuapp.com"})
 public class PostResourceController {
 
     private PostService postService;
