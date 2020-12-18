@@ -2,7 +2,6 @@ package hu.dreamteam.lux_rest.controller;
 
 import hu.dreamteam.lux_rest.entity.Post;
 import hu.dreamteam.lux_rest.service.PostService;
-import hu.dreamteam.lux_rest.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/post")
 @CrossOrigin(origins = {"http://localhost:3000", "https://lux-client.herokuapp.com"})
+@RequestMapping("/post")
 public class PostResourceController {
 
     private PostService postService;
