@@ -28,7 +28,7 @@ public class RegisterController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @CrossOrigin(origins = {"http://localhost:3000", "https://lux-client.herokuapp.com"})
+    //@CrossOrigin(origins = {"http://localhost:3000", "https://lux-client.herokuapp.com"})
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody User user){
         try {

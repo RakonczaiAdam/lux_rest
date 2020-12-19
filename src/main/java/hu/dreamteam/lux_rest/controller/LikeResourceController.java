@@ -12,7 +12,6 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping("/like")
-@CrossOrigin(origins = {"http://localhost:3000", "https://lux-client.herokuapp.com"})
 public class LikeResourceController {
 
     private LikeService likeService;

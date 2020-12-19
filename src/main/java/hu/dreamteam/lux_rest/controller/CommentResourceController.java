@@ -20,7 +20,6 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/comment")
-@CrossOrigin(origins = {"http://localhost:3000", "https://lux-client.herokuapp.com"})
 public class CommentResourceController {
 
     private CommentService commentService;

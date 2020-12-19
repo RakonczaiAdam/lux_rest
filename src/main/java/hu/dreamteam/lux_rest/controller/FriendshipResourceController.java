@@ -13,7 +13,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/friendship")
-@CrossOrigin(origins = {"http://localhost:3000", "https://lux-client.herokuapp.com"})
 public class FriendshipResourceController {
 
     private FriendshipService friendshipService;

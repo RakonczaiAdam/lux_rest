@@ -8,10 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collection;
+import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:3000", "https://lux-client.herokuapp.com"})
 @RequestMapping("/post")
 public class PostResourceController {
 
@@ -23,7 +22,7 @@ public class PostResourceController {
     }
 
     @GetMapping("/get")
-    public Collection<Post> get(HttpServletRequest request){
+    public List<Post> get(HttpServletRequest request){
         return postService.getPosts(request.getUserPrincipal().getName());
     }
 
