@@ -27,13 +27,14 @@ public class PostResourceController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<String> save(@RequestBody Post post, HttpServletRequest request){
+    public ResponseEntity<Post> save(@RequestBody Post post, HttpServletRequest request){
+        Post saved = null;
         try {
-            postService.savePost(post,request.getUserPrincipal().getName());
+            saved = postService.savePost(post,request.getUserPrincipal().getName());
         }catch (Exception e){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(saved, HttpStatus.OK);
     }
 
 }

@@ -43,10 +43,10 @@ public class PostService {
         return posts;
     }
 
-    public void savePost(Post post, String user){
+    public Post savePost(Post post, String user){
         post.setUser(userRepo.findByUsername(user));
         post.setDate(new Date());
-        postRepo.save(post);
+        return postRepo.save(post);
     }
 
 }
