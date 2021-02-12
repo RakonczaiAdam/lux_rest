@@ -29,7 +29,7 @@ class LuxRestApplicationTests {
 	@Test
 	void commentInsert() {
 		final String COMMENT_TEXT = "comment";
-		User user = userRepo.findByUsername("encyuser");
+		User user = userRepo.findByUsername("adamuser");
 		Post post = postRepo.findById(1l).get();
 		Comment comment = new Comment();
 		comment.addAttributes(COMMENT_TEXT, post, user, new Date());
@@ -76,8 +76,8 @@ class LuxRestApplicationTests {
 		String pw ="root";
 		String us = "Kati";
 		User user = new User(us,pw);
-		User newUser = userRepo.save(user);
-		userService.saveUser(newUser);
+		//User newUser = userRepo.save(user);
+		//userService.saveUser(newUser);
 
 		Assertions.assertEquals(user.getPassword(),pw );
 		Assertions.assertEquals(user.getUsername(),us );
